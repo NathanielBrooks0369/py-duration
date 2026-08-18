@@ -3,9 +3,8 @@
 ```
 duration.py
 ```
+We keep the Python Duration test colocated with the implementation so the examples stay honest about edge cases instead of drifting into docs that lie.
 
-If you want to see how this behaves in practice, run the Python Duration test file right next to the implementation. It gives you concrete examples of what parses and what doesn't.
+Parsing `1h30m` style strings into seconds and formatting them back is a solved problem if you stay inside the standard library, and that is the only constraint we accept here: no extra dependency to vet, patch, or page someone about at 3am.
 
-The core job here is turning strings like '1h30m' into a plain number of seconds, and then formatting that number back into the same human-readable shape. No external packages involved.
-
-Python Duration is built entirely on the standard library. There's no service to spin up, no dependency to vendor, nothing to install beyond the interpreter itself. That keeps the operational surface small, which matters when you're deciding whether this stays in your image or gets pulled out later.
+Python Duration pulls from nothing but the standard library, so there is no service to provision, no version matrix to track, and no lock-in to weigh against the next renewal cycle.
