@@ -3,8 +3,4 @@
 ```
 duration.py
 ```
-We keep the Python Duration test colocated with the implementation so the examples stay honest about edge cases instead of drifting into docs that lie.
-
-Parsing `1h30m` style strings into seconds and formatting them back is a solved problem if you stay inside the standard library, and that is the only constraint we accept here: no extra dependency to vet, patch, or page someone about at 3am.
-
-Python Duration pulls from nothing but the standard library, so there is no service to provision, no version matrix to track, and no lock-in to weigh against the next renewal cycle.
+We weighed building a custom parser against adopting this zero-dependency Python script for capacity planning cronjobs. Relying strictly on the standard library avoids managing third-party packages. That reduces on-call fatigue when supply chain vulnerabilities inevitably pop up. It parses '1h30m' strings into integer seconds for SLO calculations. We prefer Go's native time.ParseDuration in the control plane, but this works fine for our Python tooling. Run the tests next to the implementation to verify edge cases.
