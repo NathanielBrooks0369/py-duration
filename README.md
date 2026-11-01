@@ -3,4 +3,8 @@
 ```
 duration.py
 ```
-We weighed building a custom parser against adopting this zero-dependency Python script for capacity planning cronjobs. Relying strictly on the standard library avoids managing third-party packages. That reduces on-call fatigue when supply chain vulnerabilities inevitably pop up. It parses '1h30m' strings into integer seconds for SLO calculations. We prefer Go's native time.ParseDuration in the control plane, but this works fine for our Python tooling. Run the tests next to the implementation to verify edge cases.
+Run the Python Duration test beside the implementation if you want concrete examples, because in my experience a parser without local test coverage becomes toil the moment a format edge case pages on-call.
+
+Parsing '1h30m' style durations to seconds and back remains dependency-free, a decision driven by capacity-planning reflex and the desire to protect our SLO from supply-chain noise.
+
+Python Duration uses only the standard library, so there is no service to provision and no dependency to track in the next build-vs-buy discussion.
